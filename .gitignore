@@ -1,2 +1,5 @@
 /.stylegan2-cache/
 __pycache__/
+results/
+pre-trained-networks/
+datasets/

@@ -1,3 +1,4 @@
+  
 # Copyright (c) 2019, NVIDIA Corporation. All rights reserved.
 #
 # This work is made available under the Nvidia Source Code License-NC.
@@ -50,6 +51,7 @@ class TFRecordDataset:
         self._cur_lod           = -1
 
         # List tfrecords files and inspect their shapes.
+        print(self.tfrecord_dir)
         assert os.path.isdir(self.tfrecord_dir)
         tfr_files = sorted(glob.glob(os.path.join(self.tfrecord_dir, '*.tfrecords')))
         assert len(tfr_files) >= 1
@@ -83,7 +85,8 @@ class TFRecordDataset:
 
         # Load labels.
         assert max_label_size == 'full' or max_label_size >= 0
-        self._np_labels = np.zeros([1<<30, 0], dtype=np.float32)
+        #self._np_labels = np.zeros([1<<30, 0], dtype=np.float32)
+        self._np_labels = np.zeros([1<<20, 0], dtype=np.float32)
         if self.label_file is not None and max_label_size != 0:
             self._np_labels = np.load(self.label_file)
             assert self._np_labels.ndim == 2

@@ -14,6 +14,8 @@ import sys
 
 import pretrained_networks
 
+%tensorflow_version 1.x
+
 #----------------------------------------------------------------------------
 
 def generate_images(network_pkl, seeds, truncation_psi):

@@ -1,3 +1,21 @@
+
+# PokemonGAN: Pokemon Generation using StyleGAN2 with mgan-dataset
+
+データセットにmganのデータセットを用いたStyleGAN2の学習用コード
+[MonsterGAN(mgan)](https://medium.com/@yvanscher/using-gans-to-create-monsters-for-your-game-c1a3ece2f0a0)
+
+## 動作環境
+
+```
+- GPU: GTX1070
+- Python: 3.6
+- numpy: 1.19.1
+- tensorflow-gpu: 1.14.0
+- tensorflow-estimator: 1.14.0
+- tensorboard: 1.14.0
+- scipy: 1.5.2
+```
+
 ## StyleGAN2 &mdash; Official TensorFlow Implementation
 
 ![Teaser image](./docs/stylegan2-teaser-1024x256.png)

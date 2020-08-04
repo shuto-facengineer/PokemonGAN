@@ -52,14 +52,14 @@ def training_schedule(
     lod_transition_kimg     = 600,      # Thousands of real images to show when fading in new layers.
     minibatch_size_base     = 32,       # Global minibatch size.
     minibatch_size_dict     = {},       # Resolution-specific overrides.
-    minibatch_gpu_base      = 4,        # Number of samples processed at a time by one GPU.
+    minibatch_gpu_base      = 16, #4,        # Number of samples processed at a time by one GPU.
     minibatch_gpu_dict      = {},       # Resolution-specific overrides.
     G_lrate_base            = 0.002,    # Learning rate for the generator.
     G_lrate_dict            = {},       # Resolution-specific overrides.
     D_lrate_base            = 0.002,    # Learning rate for the discriminator.
     D_lrate_dict            = {},       # Resolution-specific overrides.
     lrate_rampup_kimg       = 0,        # Duration of learning rate ramp-up.
-    tick_kimg_base          = 4,        # Default interval of progress snapshots.
+    tick_kimg_base          = 1,        # Default interval of progress snapshots.
     tick_kimg_dict          = {8:28, 16:24, 32:20, 64:16, 128:12, 256:8, 512:6, 1024:4}): # Resolution-specific overrides.
 
     # Initialize result dict.
@@ -124,11 +124,12 @@ def training_loop(
     total_kimg              = 25000,    # Total length of the training, measured in thousands of real images.
     mirror_augment          = False,    # Enable mirror augment?
     drange_net              = [-1,1],   # Dynamic range used when feeding image data to the networks.
-    image_snapshot_ticks    = 50,       # How often to save image snapshots? None = only save 'reals.png' and 'fakes-init.png'.
-    network_snapshot_ticks  = 50,       # How often to save network snapshots? None = only save 'networks-final.pkl'.
+    image_snapshot_ticks    = 1,  #50     # How often to save image snapshots? None = only save 'reals.png' and 'fakes-init.png'.
+    network_snapshot_ticks  = 1, #50      # How often to save network snapshots? None = only save 'networks-final.pkl'.
     save_tf_graph           = False,    # Include full TensorFlow computation graph in the tfevents file?
     save_weight_histograms  = False,    # Include weight histograms in the tfevents file?
-    resume_pkl              = None,     # Network pickle to resume training from, None = train from scratch.
+    resume_pkl              = None, #'./results/00003-stylegan2-custom_dataset-1gpu-config-a/network-snapshot-.pkl', #None,     # Network pickle to resume training from, None = train from scratch.
+    #./results/00001-stylegan2-anime-1gpu-config-a/network-snapshot-.pkl
     resume_kimg             = 0.0,      # Assumed training progress at the beginning. Affects reporting and training schedule.
     resume_time             = 0.0,      # Assumed wallclock time at the beginning. Affects reporting.
     resume_with_new_nets    = False):   # Construct new networks according to G_args and D_args before resuming training?
@@ -264,6 +265,8 @@ def training_loop(
     prev_lod = -1.0
     running_mb_counter = 0
     while cur_nimg < total_kimg * 1000:
+        print("cur_nimg: " + str(cur_nimg))
+        print(str(total_kimg * 1000 - cur_nimg) + " left...")
         if dnnlib.RunContext.get().should_stop(): break
 
         # Choose training parameters and configure training ops.
@@ -336,7 +339,8 @@ def training_loop(
                 grid_fakes = Gs.run(grid_latents, grid_labels, is_validation=True, minibatch_size=sched.minibatch_gpu)
                 misc.save_image_grid(grid_fakes, dnnlib.make_run_dir_path('fakes%06d.png' % (cur_nimg // 1000)), drange=drange_net, grid_size=grid_size)
             if network_snapshot_ticks is not None and (cur_tick % network_snapshot_ticks == 0 or done):
-                pkl = dnnlib.make_run_dir_path('network-snapshot-%06d.pkl' % (cur_nimg // 1000))
+                # pkl = dnnlib.make_run_dir_path('network-snapshot-%06d.pkl' % (cur_nimg // 1000))
+                pkl = dnnlib.make_run_dir_path('network-snapshot-.pkl')
                 misc.save_pkl((G, D, Gs), pkl)
                 metrics.run(pkl, run_dir=dnnlib.make_run_dir_path(), data_dir=dnnlib.convert_path(data_dir), num_gpus=num_gpus, tf_config=tf_config)
 
