@@ -16,6 +16,25 @@
 - scipy: 1.5.2
 ```
 
+## 実行
+上から順番に実行する．
+
+```
+git clone git@github.com:Takuya-Shuto-engineer/PokemonGAN.git
+cd PokemonGAN
+mkdir datasets
+```
+
+[コチラ](https://www.dropbox.com/sh/isslk5zkp9ekqtc/AABTfbuLYRID6NhDvq1Vi7Hha?dl=0)からデータセットをお借りして，好きな名前でdatasets/に保存する．
+
+```
+python resize.py --input_path /datasets/mgan-dataset --output_path datasets/resized_images
+python dataset_tool.py create_from_images datasets/resized_images datasets/resized_images
+python run_training.py --num-gpus 1 --total-kimg=1000 --data-dir=datasets --config=config-f --dataset=tf_images --mirror-augment=true
+```
+
+
+
 ## StyleGAN2 &mdash; Official TensorFlow Implementation
 
 ![Teaser image](./docs/stylegan2-teaser-1024x256.png)
