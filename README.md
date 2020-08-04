@@ -29,7 +29,22 @@ cd PokemonGAN
 mkdir datasets
 ```
 
-[コチラ](https://www.dropbox.com/sh/isslk5zkp9ekqtc/AABTfbuLYRID6NhDvq1Vi7Hha?dl=0)からデータセットをお借りして，好きな名前でdatasets/に保存する．
+[コチラ](https://www.dropbox.com/sh/isslk5zkp9ekqtc/AABTfbuLYRID6NhDvq1Vi7Hha?dl=0)からデータセットをお借りして，datasets/mgan-datasetという名前で保存する．
+
+データセットは64x64にリサイズしてtensorflow用のデータ形式に変換する必要があるので以下の処理を行う．
+
+```
+mkdir datasets/resized_images datasets/tf_images 
+python resize.py --input_path datasets/mgan-dataset --output_path datasets/resized_images
+python dataset_tool.py create_from_images datasets/tf_images datasets/
+```
+
+学習開始
+--total-kimgは合計何枚の画像から学習するかという意味．kは1000の単位のこと．例えばデータセットが1万件で10000kimgを指定した場合，データセットの画像を合計1000回学習に使うということです．
+
+```
+python run_training.py --num-gpus=1 --total-kimg=1000 --data-dir=datasets --config=config-f --dataset=tf_images --mirror-augment=true
+```
 
 ## 参考
 - [【StyleGAN２入門】10個のアニメ顔で独自学習](https://qiita.com/MuAuan/items/477f72872fd33cce7949)
