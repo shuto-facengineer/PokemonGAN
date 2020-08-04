@@ -49,7 +49,8 @@ def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, m
     train.data_dir = data_dir
     train.total_kimg = total_kimg
     train.mirror_augment = mirror_augment
-    train.image_snapshot_ticks = train.network_snapshot_ticks = 1
+    train.image_snapshot_ticks = 1
+    train.network_snapshot_ticks = 5
     # 再学習する場合に設定が必要なパラメータ
     #train.resume_pkl = "./results/00000-stylegan2-tf_images-1gpu-config-f/network-snapshot-.pkl"
     #train.resume_kimg = 624
