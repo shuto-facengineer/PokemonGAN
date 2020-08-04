@@ -27,6 +27,10 @@ mkdir datasets
 
 [コチラ](https://www.dropbox.com/sh/isslk5zkp9ekqtc/AABTfbuLYRID6NhDvq1Vi7Hha?dl=0)からデータセットをお借りして，好きな名前でdatasets/に保存する．
 
+## 参考
+- [【StyleGAN２入門】10個のアニメ顔で独自学習](https://qiita.com/MuAuan/items/477f72872fd33cce7949)
+- [stylegan2で独自モデルの学習方法](http://blog.livedoor.jp/tak_tak0/archives/52424358.html)
+
 ```
 python resize.py --input_path /datasets/mgan-dataset --output_path datasets/resized_images
 python dataset_tool.py create_from_images datasets/resized_images datasets/resized_images
