@@ -102,6 +102,8 @@ def training_schedule(
 #----------------------------------------------------------------------------
 # Main training script.
 
+flag = False
+
 def training_loop(
     G_args                  = {},       # Options for generator network.
     D_args                  = {},       # Options for discriminator network.
@@ -125,7 +127,7 @@ def training_loop(
     mirror_augment          = False,    # Enable mirror augment?
     drange_net              = [-1,1],   # Dynamic range used when feeding image data to the networks.
     image_snapshot_ticks    = 1,  #50     # How often to save image snapshots? None = only save 'reals.png' and 'fakes-init.png'.
-    network_snapshot_ticks  = 1, #50      # How often to save network snapshots? None = only save 'networks-final.pkl'.
+    network_snapshot_ticks  = 5, #50      # How often to save network snapshots? None = only save 'networks-final.pkl'.
     save_tf_graph           = False,    # Include full TensorFlow computation graph in the tfevents file?
     save_weight_histograms  = False,    # Include weight histograms in the tfevents file?
     resume_pkl              = None, #'./results/00003-stylegan2-custom_dataset-1gpu-config-a/network-snapshot-.pkl', #None,     # Network pickle to resume training from, None = train from scratch.
