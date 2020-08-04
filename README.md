@@ -1,5 +1,9 @@
 
 # PokemonGAN: Pokemon Generation using StyleGAN2 with mgan-dataset
+Real
+![Real Pokemons](./images/reals.png)
+Fake
+![Fake Pokemons](./images/fakes000640.png)
 
 データセットにmganのデータセットを用いたStyleGAN2の学習用コード
 [MonsterGAN(mgan)](https://medium.com/@yvanscher/using-gans-to-create-monsters-for-your-game-c1a3ece2f0a0)
