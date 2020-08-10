@@ -46,6 +46,11 @@ python dataset_tool.py create_from_images datasets/tf_images datasets/
 python run_training.py --num-gpus=1 --total-kimg=1000 --data-dir=datasets --config=config-f --dataset=tf_images --mirror-augment=true
 ```
 
+## 記事
+- [StyleGAN2で未知のポケモンを生み出す[前編]](https://qiita.com/Takuya-Shuto-engineer/items/1e2750905f22a0b07287)
+- [StyleGAN2で未知のポケモンを生み出す[後編]](https://qiita.com/Takuya-Shuto-engineer/items/5dd9f59e495795c6656c)
+- [[GAN] ポケモンの最終進化をさらに進化させようとして闇を見た](https://qiita.com/Takuya-Shuto-engineer/items/bce45be37263c2923df3)
+
 ## 参考
 - [【StyleGAN２入門】10個のアニメ顔で独自学習](https://qiita.com/MuAuan/items/477f72872fd33cce7949)
 - [stylegan2で独自モデルの学習方法](http://blog.livedoor.jp/tak_tak0/archives/52424358.html)
